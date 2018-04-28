@@ -1,18 +1,14 @@
 #include "CircularInt.hpp"
 
-CircularInt::CircularInt(int _min, int _max)
+CircularInt::CircularInt(int _min, int _max, int _num) : min(_min), max(_max), range(max - min + 1), num(_num)
 {
-	min=_min;
-	max=_max;
-	range=max-min+1;
-	num=min;
 }
-CircularInt::CircularInt()
+
+CircularInt::CircularInt(int _min, int _max): min(_min),max(_max), range(max-min+1), num(min)
 {
-	min=0;
-	max=0;
-	range=0;
-	num=0;
+}
+CircularInt::CircularInt(): CircularInt(0,0)
+{
 }
 
 ostream& operator<< (ostream& os, const CircularInt& c)
@@ -20,103 +16,227 @@ ostream& operator<< (ostream& os, const CircularInt& c)
 	os<<c.num;
 	return os;
 }
-void CircularInt::operator=(const CircularInt& another)
+CircularInt& CircularInt::operator=(const CircularInt& another)
 {
 	num=another.num;
 	min=another.min;
 	max=another.max;
 	range=another.range;
+	return *this;
 }
 
-void CircularInt::operator--(int tmp)
+
+CircularInt& CircularInt::operator--(const int)
 {
 	if(num==min) num=max;
 	else num--; 
+	return *this;
 }
-void CircularInt::operator++(int tmp)
+CircularInt& CircularInt::operator--()
+{
+	if (num == min) num = max;
+	else num--;
+	return *this;
+}
+
+CircularInt& CircularInt::operator++(const int)
 {
 	if(num==max)num=min;
 	else num++;
+	return *this;
 }
-void CircularInt::operator--()
-{
-	if(num==min) num=max;
-	else num--; 
-}
-void CircularInt::operator++()
+CircularInt& CircularInt::operator++()
 {
 	if(num==max)num=min;
 	else num++;
+	return *this;
 }
+//Recall a=b(mod m) \Rightarrow ac=bc(mod m)
 CircularInt& CircularInt::operator*=(int tmp)
 {
-	int temp=(num-min+1)*tmp;
-	temp=temp%range;
-	*this+=temp;
+	int m = range;
+	int a = num - min;
+	int r = (a * tmp) % m;
+	if (r < 0)
+	{
+		//Since this is the complement instead of doing the plus at the end
+		//We should substract, in order to fix we multiply by -2
+		r += (range - (((a*tmp) / range) + 2)*min);
+	}
+	//Make sure that r+min <= max
+	this->num = (r + ((a*tmp) / range+1)*min);
+	return *this;
+
+
 }
-CircularInt& CircularInt::operator+=(int tmp)
+CircularInt& CircularInt::operator+=(const int inc)
 {
-	tmp=tmp%range;
-	if(tmp>=0)
-		for(int i=0;i<tmp;i++) ++*this;
-	else *this-=(-tmp);
+	int m = this->range;
+	int val = this->num - this->min;
+	int result = (val + inc) % m;
+	this->num = result + min;
+	return *this;
 }
-int operator+(CircularInt& first, CircularInt& sec)
+const CircularInt operator+ (const CircularInt& lhs, const int rhs)
 {
-	return (first.num + sec.num) % first.range + first.min-1;
+	int m = lhs.range;
+	int val = lhs.num - lhs.min;
+	int result = (val + rhs) % m;
+	int num = result + lhs.min;
+	int min = lhs.min;
+	int max = lhs.max;
+	return CircularInt(min,max,num);
+}
+const CircularInt operator+ (const int lhs, const CircularInt& rhs)
+{
+	return rhs + lhs;
+}
+const CircularInt operator+ (const CircularInt& lhs, const CircularInt& rhs)
+{
+	int m = lhs.range;
+	int val = lhs.num - lhs.min;
+	int result = (val + rhs.num) % m;
+	int num = result + lhs.min;
+	int min = lhs.min;
+	int max = lhs.max;
+	return CircularInt(min, max, num);
 }
 
-CircularInt& operator *(int tmp,const CircularInt& c)
+const CircularInt operator* (const CircularInt& lhs, const CircularInt& rhs)
 {
-	CircularInt c1=c;
-	int temp=(c1.num-c1.min+1)*tmp;
-	temp=temp%c1.range;
-	c1.num=c1.max;//treat temp%range=0
-	c1+=temp;
-	return c1;
+	int rlV = lhs.num - lhs.min;
+	int rRv = rhs.num - rhs.min;
+	int rResult = (rlV*rlV) % lhs.range;
+	if (rResult < 0) rResult += (lhs.range - 2 * lhs.min);
+	return CircularInt(lhs.min, lhs.max, rResult + ((rlV*rlV) / lhs.range + 1)*lhs.min);
 }
- int operator/(const CircularInt& c, int tmp)
+const CircularInt operator* (const CircularInt& lhs, const int rhs)
 {
-	/*for(int i=min;i<=max;i++)
+	int rlV = lhs.num - lhs.min;
+	int rRv = rhs;
+	int rResult = (rlV*rRv) % lhs.range;
+	if (rResult < 0)
 	{
-		if((i*tmp) % range+min==num) {num=i;return;}
-	}*/
-	CircularInt c1=c;
-	if(false)
-		throw string("fdfd");
-	else
-	{
-		c1.num=c1.num/3;
-		
+		//Since this is the complement instead of doing the plus at the end
+		//We should substract, in order to fix we multiply by -2
+		rResult += (lhs.range - (((rlV*rRv) / lhs.range) +2)*lhs.min);
 	}
-	return 3;
+	return CircularInt(lhs.min, lhs.max, rResult + (((rlV*rRv) / lhs.range) + 1)*lhs.min);
 }
-CircularInt& CircularInt::operator-=(int tmp)
+const CircularInt operator* (const int lhs, const CircularInt& rhs)
 {
-	tmp=tmp%range;
-	if(tmp>=0)
-		for(int i=0;i<tmp;i++) --*this;
-	else *this+=-tmp;
+	return rhs * lhs;
 }
-CircularInt& operator-(int tmp, const CircularInt& c)
+const CircularInt operator- (const CircularInt& lhs, const int rhs)
 {
-	CircularInt c1=-c;
-	c1+=tmp;
-	return c1;
-}
-CircularInt& operator-(const CircularInt& c)
-{
-	CircularInt c1=c;
-	int tmp=c.num-c.min+1;
-	c1.num=c1.max;
-	for(int i=0;i<tmp;i++)
+	int rlV = lhs.num - lhs.min;
+	int rRv = rhs;
+	int rResult = (rlV - rRv) % lhs.range;
+	if (rResult <= 0)
 	{
-		c1--;
+		rResult += (lhs.range - 2 * lhs.min);
 	}
-	return c1;
+	return CircularInt(lhs.min, lhs.max, rResult + lhs.min);
 }
-bool CircularInt::operator ==(const CircularInt& c)
+const CircularInt operator- (const int lhs, const CircularInt& rhs)
 {
-	if(min==c.min && max==c.max && range==c.range && num==c.num) return true;
-	return false;	
+	int rlv = lhs;
+	int rRv = rhs.num - rhs.min;
+	int rResult = (lhs - rRv) % rhs.range;
+	if (rResult <= 0)
+	{
+		rResult += (rhs.range - 2*rhs.min);
+	}
+	return CircularInt(rhs.min, rhs.max, rResult + rhs.min);
+}
+CircularInt & CircularInt::operator-=(int dec)
+{
+
+	CircularInt lhs = *this;
+	int rlV = lhs.num - lhs.min;
+	int rRv = dec;
+	int rResult = (rlV*rlV) % lhs.range;
+	if (rResult < 0)
+	{
+		rResult = rResult + range;
+	}
+	this->num = (lhs.min, lhs.max, rResult + lhs.min);
+	return *this;
+}
+
+inline bool operator==(const CircularInt& lhs, const CircularInt& rhs)
+{
+	return
+		lhs.min == rhs.min &&
+		lhs.max == rhs.max &&
+		lhs.range == rhs.range &&
+		lhs.num == rhs.num;
+}
+inline bool operator!=(const CircularInt& lhs, const CircularInt& rhs)
+{
+	return !(lhs == rhs);
+}
+inline bool operator< (const CircularInt& lhs, const CircularInt& rhs)
+{
+	return lhs.num < rhs.num;
+}
+inline bool operator<= (const CircularInt& lhs, const CircularInt& rhs)
+{
+	return lhs.num <= rhs.num;
+}
+inline bool operator> (const CircularInt& lhs, const CircularInt& rhs)
+{
+	return lhs.num > rhs.num;
+}
+inline bool operator>= (const CircularInt& lhs, const CircularInt& rhs)
+{
+	return lhs.num >= rhs.num;
+}
+const CircularInt CircularInt::operator-() const
+{
+	return (CircularInt(this->min, this->max, this->num) * (-1));
+}
+int gcd(int a, int b) { return b == 0 ? a : gcd(b, a % b); }
+/*
+** Recall that ac=bc (mod m) if and only if a=b(mod m/gcd(c,m))
+** So let call r = ac.
+** Moreover Recall that there is a solution if and only if 
+** (c,m)|c
+*/
+CircularInt operator/(const CircularInt & lhs, const int rhs)
+{
+	int r = lhs.num - lhs.min;
+	int d = gcd(rhs, lhs.range);
+	if (lhs.num % d != 0)
+		throw std::string("There is no solution for this congruences");
+	int result = r / d;
+	return CircularInt(lhs.min, lhs.max, result+lhs.min);
+}
+
+int main() 
+{
+	CircularInt hour{ 1, 12 };                 // <hour is an integer between 1 and 12, like an hour on the clock>
+	cout << hour << endl;                     // 1
+	hour += 4;  cout << hour << endl;         // 5
+	(hour += 2)++;  cout << hour << endl;     // 8
+	hour += 18;   cout << hour << endl;       // 2   (18 hours after 8)
+	cout << -hour << endl;                    // 10  (2 hours before midnight)
+	hour = 1 - hour; cout << hour << endl;    // 11  (2 hours before 1)
+	cout << hour + hour << endl;                // 10 (11 hours after 11)
+	hour *= 2;   cout << hour << endl;        // 10 (11*2 = 11+11)
+	cout << hour / 2 << endl;                   // TWO OPTIONS: 11 (since 11*2=10) or 5 (since 5*2=10 too).
+
+	try 
+	{
+		cout << hour / 3;
+	}
+	catch (const string& message) 
+	{
+		cout << message << endl;     // "There is no number x in {1,12} such that x*3=10"
+	}
+
+	// RIDDLES (not for submission): 
+	//  * when is there exactly one answer to a/b?
+	//  * when are there two or more answers to a/b?
+	//	* when is there no answer to a/b?
 }
