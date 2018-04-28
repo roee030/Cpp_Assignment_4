@@ -13,19 +13,19 @@ CircularInt::CircularInt(): CircularInt(0,0)
 
 ostream& operator<< (ostream& os, const CircularInt& c)
 {
-	puts("<<");
+	puts("ostream& operator<< (ostream& os, const CircularInt& c)");
 	os<<c.num;
 	return os;
 }
 istream& operator>>(istream& in, CircularInt& c)
 {
-	puts(">>");
+	puts("istream& operator>>(istream& in, CircularInt& c)");
 	in >> c.num;
 	return in;
 }
 CircularInt& CircularInt::operator=(const CircularInt& another)
 {
-	puts("=");
+	puts("CircularInt& CircularInt::operator=(const CircularInt& another)");
 	num=another.num;
 	min=another.min;
 	max=another.max;
@@ -35,7 +35,7 @@ CircularInt& CircularInt::operator=(const CircularInt& another)
 
 CircularInt & CircularInt::operator=(const int another)
 {
-	puts("=");
+	puts("CircularInt & CircularInt::operator=(const int another)");
 	int val = 0;
 	if (another > max || another < min)
 	{
@@ -54,14 +54,14 @@ CircularInt & CircularInt::operator=(const int another)
 
 CircularInt& CircularInt::operator--(const int)
 {
-	puts("--");
+	puts("CircularInt& CircularInt::operator--(const int)");
 	if(num==min) num=max;
 	else num--; 
 	return *this;
 }
 CircularInt& CircularInt::operator--()
 {
-	puts("--");
+	puts("CircularInt& CircularInt::operator--()");
 	if (num == min) num = max;
 	else num--;
 	return *this;
@@ -69,14 +69,14 @@ CircularInt& CircularInt::operator--()
 
 CircularInt& CircularInt::operator++(const int)
 {
-	puts("++");
+	puts("CircularInt& CircularInt::operator++(const int)");
 	if(num==max)num=min;
 	else num++;
 	return *this;
 }
 CircularInt& CircularInt::operator++()
 {
-	puts("++");
+	puts("CircularInt& CircularInt::operator++()");
 	if(num==max)num=min;
 	else num++;
 	return *this;
@@ -84,6 +84,7 @@ CircularInt& CircularInt::operator++()
 //Recall a=b(mod m) \Rightarrow ac=bc(mod m)
 CircularInt& CircularInt::operator*=(int tmp)
 {
+	puts("CircularInt& CircularInt::operator*=(int tmp)");
 	int m = range;
 	int a = num - min;
 	int r = (a * tmp) % m;
@@ -101,10 +102,12 @@ CircularInt& CircularInt::operator*=(int tmp)
 }
 CircularInt & CircularInt::operator*=(const CircularInt & other)
 {
+	puts("CircularInt & CircularInt::operator*=(const CircularInt & other)");
 	return *this *= other.num;
 }
 CircularInt& CircularInt::operator+=(const int inc)
 {
+	puts("CircularInt& CircularInt::operator+=(const int inc)");
 	int m = this->range;
 	int val = this->num - this->min;
 	int result = (val + inc) % m;
@@ -113,10 +116,12 @@ CircularInt& CircularInt::operator+=(const int inc)
 }
 CircularInt & CircularInt::operator+=(const CircularInt & other)
 {
+	puts("CircularInt & CircularInt::operator+=(const CircularInt & other)");
 	return *this += other.num;
 }
 CircularInt & CircularInt::operator/=(const int other)
 {
+	puts("CircularInt & CircularInt::operator/=(const int other)");
 	int r = this->num - this->min;
 	int d = gcd(other, this->range);
 	if (this->num % d != 0)
@@ -127,6 +132,7 @@ CircularInt & CircularInt::operator/=(const int other)
 }
 const CircularInt operator+ (const CircularInt& lhs, const int rhs)
 {
+	puts("const CircularInt operator+ (const CircularInt& lhs, const int rhs)");
 	int m = lhs.range;
 	int val = lhs.num - lhs.min;
 	int result = (val + rhs) % m;
@@ -137,10 +143,12 @@ const CircularInt operator+ (const CircularInt& lhs, const int rhs)
 }
 const CircularInt operator+ (const int lhs, const CircularInt& rhs)
 {
+	puts("const CircularInt operator+ (const int lhs, const CircularInt& rhs)");
 	return rhs + lhs;
 }
 const CircularInt operator+ (const CircularInt& lhs, const CircularInt& rhs)
 {
+	puts("const CircularInt operator+ (const CircularInt& lhs, const CircularInt& rhs)");
 	int m = lhs.range;
 	int val = lhs.num - lhs.min;
 	int result = (val + rhs.num) % m;
@@ -152,6 +160,7 @@ const CircularInt operator+ (const CircularInt& lhs, const CircularInt& rhs)
 
 const CircularInt operator* (const CircularInt& lhs, const CircularInt& rhs)
 {
+	puts("const CircularInt operator* (const CircularInt& lhs, const CircularInt& rhs)");
 	int rlV = lhs.num - lhs.min;
 	int rRv = rhs.num - rhs.min;
 	int rResult = (rlV*rlV) % lhs.range;
@@ -160,6 +169,7 @@ const CircularInt operator* (const CircularInt& lhs, const CircularInt& rhs)
 }
 const CircularInt operator* (const CircularInt& lhs, const int rhs)
 {
+	puts("const CircularInt operator* (const CircularInt& lhs, const int rhs)");
 	int rlV = lhs.num - lhs.min;
 	int rRv = rhs;
 	int rResult = (rlV*rRv) % lhs.range;
@@ -173,10 +183,12 @@ const CircularInt operator* (const CircularInt& lhs, const int rhs)
 }
 const CircularInt operator* (const int lhs, const CircularInt& rhs)
 {
+	puts("const CircularInt operator* (const int lhs, const CircularInt& rhs)");
 	return rhs * lhs;
 }
 const CircularInt operator- (const CircularInt& lhs, const int rhs)
 {
+	puts("const CircularInt operator- (const CircularInt& lhs, const int rhs)");
 	int rlV = lhs.num - lhs.min;
 	int rRv = rhs;
 	int rResult = (rlV - rRv) % lhs.range;
@@ -188,6 +200,7 @@ const CircularInt operator- (const CircularInt& lhs, const int rhs)
 }
 const CircularInt operator- (const int lhs, const CircularInt& rhs)
 {
+	puts("const CircularInt operator- (const int lhs, const CircularInt& rhs)");
 	int rlv = lhs;
 	int rRv = rhs.num - rhs.min;
 	int rResult = (lhs - rRv) % rhs.range;
@@ -199,13 +212,14 @@ const CircularInt operator- (const int lhs, const CircularInt& rhs)
 }
 const CircularInt operator-(const CircularInt & lhs, const CircularInt & rhs)
 {
+	puts("const CircularInt operator-(const CircularInt & lhs, const CircularInt & rhs)");
 	if(lhs.range != rhs.range)
 		throw std::string("Invalid");
 	return lhs - rhs.num;
 }
 CircularInt & CircularInt::operator-=(int dec)
 {
-
+	puts("CircularInt & CircularInt::operator-=(int dec)");
 	CircularInt lhs = *this;
 	int rlV = lhs.num - lhs.min;
 	int rRv = dec;
@@ -220,6 +234,7 @@ CircularInt & CircularInt::operator-=(int dec)
 
 CircularInt & CircularInt::operator-=(const CircularInt & other)
 {
+	puts("CircularInt & CircularInt::operator-=(const CircularInt & other)");
 	CircularInt lhs = *this;
 	int rlV = lhs.num - lhs.min;
 	int rRv = other.num;
@@ -234,6 +249,7 @@ CircularInt & CircularInt::operator-=(const CircularInt & other)
 
 bool operator==(const CircularInt& lhs, const CircularInt& rhs)
 {
+	puts("bool operator==(const CircularInt& lhs, const CircularInt& rhs)");
 	return
 		lhs.min == rhs.min &&
 		lhs.max == rhs.max &&
@@ -242,54 +258,67 @@ bool operator==(const CircularInt& lhs, const CircularInt& rhs)
 }
 bool operator==(const CircularInt & lhs, const int rhs)
 {
+	puts("==");
 	return lhs.num == rhs;
 }
 bool operator==(const int lhs, const CircularInt & rhs)
 {
+	puts("==");
 	return lhs == rhs.num;
 }
 bool operator!=(const CircularInt& lhs, const CircularInt& rhs)
 {
+	puts("!=");
 	return !(lhs == rhs);
 }
 bool operator!=(const CircularInt & lhs, const int rhs)
 {
+	puts("!=");
 	return lhs.num != rhs;
 }
 bool operator!=(const int lhs, const CircularInt & rhs)
 {
+	puts("!=");
 	return rhs.num != lhs;
 }
 bool operator< (const CircularInt& lhs, const CircularInt& rhs)
 {
+	puts("<");
 	return lhs.num < rhs.num;
 }
 bool operator<= (const CircularInt& lhs, const CircularInt& rhs)
 {
+	puts("<=");
 	return lhs.num <= rhs.num;
 }
 bool operator> (const CircularInt& lhs, const CircularInt& rhs)
 {
+	puts(">");
 	return lhs.num > rhs.num;
 }
 bool operator>= (const CircularInt& lhs, const CircularInt& rhs)
 {
+	puts(">=");
 	return lhs.num >= rhs.num;
 }
 bool operator<(const int lhs, const CircularInt & rhs)
 {
+	puts("<");
 	return lhs < rhs.num;
 }
 bool operator<=(const int lhs, const CircularInt & rhs)
 {
+	puts("<=");
 	return lhs <= rhs.num;
 }
 bool operator>(const int lhs, const CircularInt & rhs)
 {
+	puts(">");
 	return lhs > rhs.num;
 }
 bool operator>=(const int lhs, const CircularInt & rhs)
 {
+	puts(">=");
 	return lhs >= rhs.num;
 }
 bool operator<(const CircularInt & lhs, const int rhs)
@@ -310,6 +339,7 @@ bool operator>=(const CircularInt & lhs, const int rhs)
 }
 const CircularInt CircularInt::operator-() const
 {
+	puts("const CircularInt CircularInt::operator-() const");
 	return (CircularInt(this->min, this->max, this->num) * (-1));
 }
 int CircularInt::gcd(int a, int b) { return b == 0 ? a : gcd(b, a % b); }
@@ -321,6 +351,7 @@ int CircularInt::gcd(int a, int b) { return b == 0 ? a : gcd(b, a % b); }
 */
 CircularInt operator/(const CircularInt & lhs, const int rhs)
 {
+	puts("CircularInt operator/(const CircularInt & lhs, const int rhs)");
 	int r = lhs.num - lhs.min;
 	int d = CircularInt::gcd(rhs, lhs.range);
 	if (lhs.num % d != 0)
@@ -331,6 +362,7 @@ CircularInt operator/(const CircularInt & lhs, const int rhs)
 
 CircularInt operator/(const int lhs, const CircularInt & rhs)
 {
+	puts("CircularInt operator/(const int lhs, const CircularInt & rhs)");
 	return rhs / lhs;
 }
 
