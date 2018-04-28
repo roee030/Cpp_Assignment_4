@@ -232,11 +232,11 @@ inline bool operator==(const CircularInt& lhs, const CircularInt& rhs)
 		lhs.range == rhs.range &&
 		lhs.num == rhs.num;
 }
-bool operator==(const CircularInt & lhs, const int rhs)
+inline bool operator==(const CircularInt & lhs, const int rhs)
 {
 	return lhs.num == rhs;
 }
-bool operator==(const int lhs, const CircularInt & rhs)
+inline bool operator==(const int lhs, const CircularInt & rhs)
 {
 	return lhs == rhs.num;
 }
@@ -244,11 +244,11 @@ inline bool operator!=(const CircularInt& lhs, const CircularInt& rhs)
 {
 	return !(lhs == rhs);
 }
-bool operator!=(const CircularInt & lhs, const int rhs)
+inline bool operator!=(const CircularInt & lhs, const int rhs)
 {
 	return lhs.num != rhs;
 }
-bool operator!=(const int lhs, const CircularInt & rhs)
+inline bool operator!=(const int lhs, const CircularInt & rhs)
 {
 	return rhs.num != lhs;
 }
