@@ -67,4 +67,4 @@ public:
 		friend CircularInt operator/ (const int lhs, const CircularInt& rhs);
 		static int gcd(int a, int b);
 };
-#endif CircularInt
+#endif
