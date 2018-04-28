@@ -206,7 +206,7 @@ CircularInt & CircularInt::operator-=(int dec)
 	{
 		rResult = rResult + range;
 	}
-	this->num = (lhs.min, lhs.max, rResult + lhs.min);
+	this->num = rResult + lhs.min;
 	return *this;
 }
 
@@ -220,7 +220,7 @@ CircularInt & CircularInt::operator-=(const CircularInt & other)
 	{
 		rResult = rResult + range;
 	}
-	this->num = (lhs.min, lhs.max, rResult + lhs.min);
+	this->num = rResult + lhs.min;
 	return *this;
 }
 
