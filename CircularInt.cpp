@@ -74,11 +74,29 @@ CircularInt& CircularInt::operator*=(int tmp)
 
 
 }
+CircularInt & CircularInt::operator*=(const CircularInt & other)
+{
+	return *this *= other.num;
+}
 CircularInt& CircularInt::operator+=(const int inc)
 {
 	int m = this->range;
 	int val = this->num - this->min;
 	int result = (val + inc) % m;
+	this->num = result + min;
+	return *this;
+}
+CircularInt & CircularInt::operator+=(const CircularInt & other)
+{
+	return *this += other.num;
+}
+CircularInt & CircularInt::operator/=(const int other)
+{
+	int r = this->num - this->min;
+	int d = gcd(other, this->range);
+	if (r % d != 0)
+		throw std::string("There is no solution for this congruences");
+	int result = r / d;
 	this->num = result + min;
 	return *this;
 }
@@ -175,6 +193,20 @@ CircularInt & CircularInt::operator-=(int dec)
 	return *this;
 }
 
+CircularInt & CircularInt::operator-=(const CircularInt & other)
+{
+	CircularInt lhs = *this;
+	int rlV = lhs.num - lhs.min;
+	int rRv = other.num;
+	int rResult = (rlV*rlV) % lhs.range;
+	if (rResult < 0)
+	{
+		rResult = rResult + range;
+	}
+	this->num = (lhs.min, lhs.max, rResult + lhs.min);
+	return *this;
+}
+
 inline bool operator==(const CircularInt& lhs, const CircularInt& rhs)
 {
 	return
@@ -183,9 +215,25 @@ inline bool operator==(const CircularInt& lhs, const CircularInt& rhs)
 		lhs.range == rhs.range &&
 		lhs.num == rhs.num;
 }
+bool operator==(const CircularInt & lhs, const int rhs)
+{
+	return lhs.num == rhs;
+}
+bool operator==(const int lhs, const CircularInt & rhs)
+{
+	return lhs == rhs.num;
+}
 inline bool operator!=(const CircularInt& lhs, const CircularInt& rhs)
 {
 	return !(lhs == rhs);
+}
+bool operator!=(const CircularInt & lhs, const int rhs)
+{
+	return lhs.num != rhs;
+}
+bool operator!=(const int lhs, const CircularInt & rhs)
+{
+	return rhs.num != lhs;
 }
 inline bool operator< (const CircularInt& lhs, const CircularInt& rhs)
 {
@@ -203,6 +251,38 @@ inline bool operator>= (const CircularInt& lhs, const CircularInt& rhs)
 {
 	return lhs.num >= rhs.num;
 }
+inline bool operator<(const int lhs, const CircularInt & rhs)
+{
+	return lhs < rhs.num;
+}
+inline bool operator<=(const int lhs, const CircularInt & rhs)
+{
+	return lhs <= rhs.num;
+}
+inline bool operator>(const int lhs, const CircularInt & rhs)
+{
+	return lhs > rhs.num;
+}
+inline bool operator>=(const int lhs, const CircularInt & rhs)
+{
+	return lhs >= rhs.num;
+}
+inline bool operator<(const CircularInt & lhs, const int rhs)
+{
+	return lhs.num < rhs;
+}
+inline bool operator<=(const CircularInt & lhs, const int rhs)
+{
+	return lhs.num <= rhs;
+}
+inline bool operator>(const CircularInt & lhs, const int rhs)
+{
+	return lhs.num > rhs;
+}
+inline bool operator>=(const CircularInt & lhs, const int rhs)
+{
+	return lhs.num >= rhs;
+}
 const CircularInt CircularInt::operator-() const
 {
 	return (CircularInt(this->min, this->max, this->num) * (-1));
@@ -212,16 +292,21 @@ int gcd(int a, int b) { return b == 0 ? a : gcd(b, a % b); }
 ** Recall that ac=bc (mod m) if and only if a=b(mod m/gcd(c,m))
 ** So let call r = ac.
 ** Moreover Recall that there is a solution if and only if 
-** (c,m)|c
+** (c,m)|ac
 */
 CircularInt operator/(const CircularInt & lhs, const int rhs)
 {
 	int r = lhs.num - lhs.min;
 	int d = gcd(rhs, lhs.range);
-	if (lhs.num % d != 0)
+	if (r % d != 0)
 		throw std::string("There is no solution for this congruences");
 	int result = r / d;
 	return CircularInt(lhs.min, lhs.max, result+lhs.min);
+}
+
+CircularInt operator/(const int lhs, const CircularInt & rhs)
+{
+	return rhs / lhs;
 }
 
 
