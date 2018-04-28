@@ -43,7 +43,9 @@ CircularInt & CircularInt::operator=(const int another)
 	if (val > this->max)
 		val -= this->range;
 	this->num = val;
+	return *this;
 }
+
 
 
 CircularInt& CircularInt::operator--(const int)
@@ -109,7 +111,7 @@ CircularInt & CircularInt::operator/=(const int other)
 {
 	int r = this->num - this->min;
 	int d = gcd(other, this->range);
-	if (r % d != 0)
+	if (this->num % d != 0)
 		throw std::string("There is no solution for this congruences");
 	int result = r / d;
 	this->num = result + min;
@@ -302,7 +304,7 @@ const CircularInt CircularInt::operator-() const
 {
 	return (CircularInt(this->min, this->max, this->num) * (-1));
 }
-int gcd(int a, int b) { return b == 0 ? a : gcd(b, a % b); }
+int CircularInt::gcd(int a, int b) { return b == 0 ? a : gcd(b, a % b); }
 /*
 ** Recall that ac=bc (mod m) if and only if a=b(mod m/gcd(c,m))
 ** So let call r = ac.
@@ -312,8 +314,8 @@ int gcd(int a, int b) { return b == 0 ? a : gcd(b, a % b); }
 CircularInt operator/(const CircularInt & lhs, const int rhs)
 {
 	int r = lhs.num - lhs.min;
-	int d = gcd(rhs, lhs.range);
-	if (r % d != 0)
+	int d = CircularInt::gcd(rhs, lhs.range);
+	if (lhs.num % d != 0)
 		throw std::string("There is no solution for this congruences");
 	int result = r / d;
 	return CircularInt(lhs.min, lhs.max, result+lhs.min);

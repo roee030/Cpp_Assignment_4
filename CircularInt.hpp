@@ -15,6 +15,7 @@ private:
 		int max;
 		int range;
 		int num;
+
 public:
 		CircularInt(int min, int max, int num);
 		CircularInt(int min, int max);
@@ -32,7 +33,6 @@ public:
 		CircularInt& operator+=(const CircularInt& other);
 		CircularInt& operator/=(const int other);
 		const CircularInt operator-() const;
-		CircularInt& operator=(const CircularInt& another);
 		CircularInt& operator=(const int another);
 		friend inline bool operator< (const CircularInt& lhs, const CircularInt& rhs);
 		friend inline bool operator<= (const CircularInt& lhs, const CircularInt& rhs);
@@ -65,6 +65,6 @@ public:
 		friend bool operator!=(const int lhs, const CircularInt& rhs);
 		friend CircularInt operator/ (const CircularInt& lhs, const int rhs);
 		friend CircularInt operator/ (const int lhs, const CircularInt& rhs);
-		int gcd(int a, int b);
+		static int gcd(int a, int b);
 };
 #endif CircularInt
