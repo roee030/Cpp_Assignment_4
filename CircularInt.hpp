@@ -33,6 +33,7 @@ public:
 		CircularInt& operator/=(const int other);
 		const CircularInt operator-() const;
 		CircularInt& operator=(const CircularInt& another);
+		CircularInt& operator=(const int another);
 		friend inline bool operator< (const CircularInt& lhs, const CircularInt& rhs);
 		friend inline bool operator<= (const CircularInt& lhs, const CircularInt& rhs);
 		friend inline bool operator> (const CircularInt& lhs, const CircularInt& rhs);

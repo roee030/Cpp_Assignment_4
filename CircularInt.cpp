@@ -30,6 +30,21 @@ CircularInt& CircularInt::operator=(const CircularInt& another)
 	return *this;
 }
 
+CircularInt & CircularInt::operator=(const int another)
+{
+	int val = 0;
+	if (another > max || another < min)
+	{
+		val = another % this->range;
+		val += min;
+	}
+	if (val < 0)
+		val = val + this->range;
+	if (val > this->max)
+		val -= this->range;
+	this->num = val;
+}
+
 
 CircularInt& CircularInt::operator--(const int)
 {
