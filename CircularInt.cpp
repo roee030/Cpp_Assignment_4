@@ -224,7 +224,7 @@ CircularInt & CircularInt::operator-=(const CircularInt & other)
 	return *this;
 }
 
-inline bool operator==(const CircularInt& lhs, const CircularInt& rhs)
+bool operator==(const CircularInt& lhs, const CircularInt& rhs)
 {
 	return
 		lhs.min == rhs.min &&
@@ -232,71 +232,71 @@ inline bool operator==(const CircularInt& lhs, const CircularInt& rhs)
 		lhs.range == rhs.range &&
 		lhs.num == rhs.num;
 }
-inline bool operator==(const CircularInt & lhs, const int rhs)
+bool operator==(const CircularInt & lhs, const int rhs)
 {
 	return lhs.num == rhs;
 }
-inline bool operator==(const int lhs, const CircularInt & rhs)
+bool operator==(const int lhs, const CircularInt & rhs)
 {
 	return lhs == rhs.num;
 }
-inline bool operator!=(const CircularInt& lhs, const CircularInt& rhs)
+bool operator!=(const CircularInt& lhs, const CircularInt& rhs)
 {
 	return !(lhs == rhs);
 }
-inline bool operator!=(const CircularInt & lhs, const int rhs)
+bool operator!=(const CircularInt & lhs, const int rhs)
 {
 	return lhs.num != rhs;
 }
-inline bool operator!=(const int lhs, const CircularInt & rhs)
+bool operator!=(const int lhs, const CircularInt & rhs)
 {
 	return rhs.num != lhs;
 }
-inline bool operator< (const CircularInt& lhs, const CircularInt& rhs)
+bool operator< (const CircularInt& lhs, const CircularInt& rhs)
 {
 	return lhs.num < rhs.num;
 }
-inline bool operator<= (const CircularInt& lhs, const CircularInt& rhs)
+bool operator<= (const CircularInt& lhs, const CircularInt& rhs)
 {
 	return lhs.num <= rhs.num;
 }
-inline bool operator> (const CircularInt& lhs, const CircularInt& rhs)
+bool operator> (const CircularInt& lhs, const CircularInt& rhs)
 {
 	return lhs.num > rhs.num;
 }
-inline bool operator>= (const CircularInt& lhs, const CircularInt& rhs)
+bool operator>= (const CircularInt& lhs, const CircularInt& rhs)
 {
 	return lhs.num >= rhs.num;
 }
-inline bool operator<(const int lhs, const CircularInt & rhs)
+bool operator<(const int lhs, const CircularInt & rhs)
 {
 	return lhs < rhs.num;
 }
-inline bool operator<=(const int lhs, const CircularInt & rhs)
+bool operator<=(const int lhs, const CircularInt & rhs)
 {
 	return lhs <= rhs.num;
 }
-inline bool operator>(const int lhs, const CircularInt & rhs)
+bool operator>(const int lhs, const CircularInt & rhs)
 {
 	return lhs > rhs.num;
 }
-inline bool operator>=(const int lhs, const CircularInt & rhs)
+bool operator>=(const int lhs, const CircularInt & rhs)
 {
 	return lhs >= rhs.num;
 }
-inline bool operator<(const CircularInt & lhs, const int rhs)
+bool operator<(const CircularInt & lhs, const int rhs)
 {
 	return lhs.num < rhs;
 }
-inline bool operator<=(const CircularInt & lhs, const int rhs)
+bool operator<=(const CircularInt & lhs, const int rhs)
 {
 	return lhs.num <= rhs;
 }
-inline bool operator>(const CircularInt & lhs, const int rhs)
+bool operator>(const CircularInt & lhs, const int rhs)
 {
 	return lhs.num > rhs;
 }
-inline bool operator>=(const CircularInt & lhs, const int rhs)
+bool operator>=(const CircularInt & lhs, const int rhs)
 {
 	return lhs.num >= rhs;
 }
