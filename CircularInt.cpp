@@ -13,16 +13,19 @@ CircularInt::CircularInt(): CircularInt(0,0)
 
 ostream& operator<< (ostream& os, const CircularInt& c)
 {
+	puts("<<");
 	os<<c.num;
 	return os;
 }
 istream& operator>>(istream& in, CircularInt& c)
 {
+	puts(">>");
 	in >> c.num;
 	return in;
 }
 CircularInt& CircularInt::operator=(const CircularInt& another)
 {
+	puts("=");
 	num=another.num;
 	min=another.min;
 	max=another.max;
@@ -32,6 +35,7 @@ CircularInt& CircularInt::operator=(const CircularInt& another)
 
 CircularInt & CircularInt::operator=(const int another)
 {
+	puts("=");
 	int val = 0;
 	if (another > max || another < min)
 	{
@@ -50,12 +54,14 @@ CircularInt & CircularInt::operator=(const int another)
 
 CircularInt& CircularInt::operator--(const int)
 {
+	puts("--");
 	if(num==min) num=max;
 	else num--; 
 	return *this;
 }
 CircularInt& CircularInt::operator--()
 {
+	puts("--");
 	if (num == min) num = max;
 	else num--;
 	return *this;
@@ -63,12 +69,14 @@ CircularInt& CircularInt::operator--()
 
 CircularInt& CircularInt::operator++(const int)
 {
+	puts("++");
 	if(num==max)num=min;
 	else num++;
 	return *this;
 }
 CircularInt& CircularInt::operator++()
 {
+	puts("++");
 	if(num==max)num=min;
 	else num++;
 	return *this;
