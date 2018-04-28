@@ -1,3 +1,5 @@
+#ifndef CircularInt_H
+#define CircularInt_H
 #include<iostream>
 #include "iostream"
 #include <string>
@@ -44,3 +46,4 @@ public:
 		friend CircularInt operator/ (const CircularInt& lhs, const int rhs);
 		int gcd(int a, int b);
 };
+#endif CircularInt
