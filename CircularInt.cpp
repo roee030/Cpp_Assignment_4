@@ -16,6 +16,11 @@ ostream& operator<< (ostream& os, const CircularInt& c)
 	os<<c.num;
 	return os;
 }
+istream& operator>>(istream& in, CircularInt& c)
+{
+	in >> c.num;
+	return in;
+}
 CircularInt& CircularInt::operator=(const CircularInt& another)
 {
 	num=another.num;
@@ -149,6 +154,12 @@ const CircularInt operator- (const int lhs, const CircularInt& rhs)
 	}
 	return CircularInt(rhs.min, rhs.max, rResult + rhs.min);
 }
+const CircularInt operator-(const CircularInt & lhs, const CircularInt & rhs)
+{
+	if(lhs.range != rhs.range)
+		throw std::string("Invalid");
+	return lhs - rhs.num;
+}
 CircularInt & CircularInt::operator-=(int dec)
 {
 
@@ -213,6 +224,7 @@ CircularInt operator/(const CircularInt & lhs, const int rhs)
 	return CircularInt(lhs.min, lhs.max, result+lhs.min);
 }
 
+
 int main() 
 {
 	CircularInt hour{ 1, 12 };                 // <hour is an integer between 1 and 12, like an hour on the clock>
@@ -225,7 +237,8 @@ int main()
 	cout << hour + hour << endl;                // 10 (11 hours after 11)
 	hour *= 2;   cout << hour << endl;        // 10 (11*2 = 11+11)
 	cout << hour / 2 << endl;                   // TWO OPTIONS: 11 (since 11*2=10) or 5 (since 5*2=10 too).
-
+	CircularInt hour2{ 1,12 };
+	cout << (hour - hour2) << endl;
 	try 
 	{
 		cout << hour / 3;
