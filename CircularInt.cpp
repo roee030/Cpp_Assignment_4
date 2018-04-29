@@ -27,7 +27,7 @@ int CircularInt::check(int value)
 	return -1;
 }
 
-CircularInt::CircularInt(int _min, int _max, int _num) : min(_min), max(_max), range(max - min + 1), num(_num)
+CircularInt::CircularInt(int _min, int _max, int _num) : min(_min), max(_max), range(max - min + 1), num(this->check(_num))
 {
 }
 
@@ -40,14 +40,15 @@ CircularInt::CircularInt(): CircularInt(0,0)
 
 ostream& operator<< (ostream& os, const CircularInt& c)
 {
-	puts("ostream& operator<< (ostream& os, const CircularInt& c)");
+	puts("<<");
 	os<<c.num;
 	return os;
 }
 istream& operator>>(istream& in, CircularInt& c)
 {
-	puts("istream& operator>>(istream& in, CircularInt& c)");
+	puts(">>");
 	in >> c.num;
+	c.num = c.check(c.num);
 	return in;
 }
 CircularInt& CircularInt::operator=(const CircularInt& another)
@@ -265,7 +266,6 @@ CircularInt & CircularInt::operator-=(const CircularInt & other)
 
 bool operator==(const CircularInt& lhs, const CircularInt& rhs)
 {
-	puts("bool operator==(const CircularInt& lhs, const CircularInt& rhs)");
 	return
 		lhs.min == rhs.min &&
 		lhs.max == rhs.max &&
@@ -274,67 +274,54 @@ bool operator==(const CircularInt& lhs, const CircularInt& rhs)
 }
 bool operator==(const CircularInt & lhs, const int rhs)
 {
-	puts("==");
 	return lhs.num == rhs;
 }
 bool operator==(const int lhs, const CircularInt & rhs)
 {
-	puts("==");
 	return lhs == rhs.num;
 }
 bool operator!=(const CircularInt& lhs, const CircularInt& rhs)
 {
-	puts("!=");
 	return !(lhs == rhs);
 }
 bool operator!=(const CircularInt & lhs, const int rhs)
 {
-	puts("!=");
 	return lhs.num != rhs;
 }
 bool operator!=(const int lhs, const CircularInt & rhs)
 {
-	puts("!=");
 	return rhs.num != lhs;
 }
 bool operator< (const CircularInt& lhs, const CircularInt& rhs)
 {
-	puts("<");
 	return lhs.num < rhs.num;
 }
 bool operator<= (const CircularInt& lhs, const CircularInt& rhs)
 {
-	puts("<=");
 	return lhs.num <= rhs.num;
 }
 bool operator> (const CircularInt& lhs, const CircularInt& rhs)
 {
-	puts(">");
 	return lhs.num > rhs.num;
 }
 bool operator>= (const CircularInt& lhs, const CircularInt& rhs)
 {
-	puts(">=");
 	return lhs.num >= rhs.num;
 }
 bool operator<(const int lhs, const CircularInt & rhs)
 {
-	puts("<");
 	return lhs < rhs.num;
 }
 bool operator<=(const int lhs, const CircularInt & rhs)
 {
-	puts("<=");
 	return lhs <= rhs.num;
 }
 bool operator>(const int lhs, const CircularInt & rhs)
 {
-	puts(">");
 	return lhs > rhs.num;
 }
 bool operator>=(const int lhs, const CircularInt & rhs)
 {
-	puts(">=");
 	return lhs >= rhs.num;
 }
 bool operator<(const CircularInt & lhs, const int rhs)
