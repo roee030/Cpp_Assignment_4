@@ -16,7 +16,9 @@ CircularInt::CircularInt()
 	num=0;
 }
 //~~~~~~~~~~~~
-CircularInt::~CircularInt(){}
+CircularInt::~CircularInt()
+{
+}
 void CircularInt::norm()
 {
 	while(num>max)num=num-range;
@@ -68,17 +70,17 @@ CircularInt& CircularInt::operator++()
 	return *this;
 }
 
-CircularInt operator -(const CircularInt& c,int x)
+CircularInt operator -(const CircularInt& cl,int x)
 {
-	CircularInt c1{c.min,c.max};
-	c1.num=c.num-x;
+	CircularInt c1{cl.min,cl.max};
+	c1.num=cl.num-x;
 	c1.norm();
 	return c1;
 }
-CircularInt operator -(const CircularInt& ci)
+CircularInt operator -(const CircularInt& cl)
 {
-	CircularInt c1{c.min,c.max};
-	c1.num=-ci.num;
+	CircularInt c1{cl.min,cl.max};
+	c1.num=-cl.num;
 	c1.norm();
 	return c1;
 }
@@ -91,7 +93,7 @@ CircularInt operator -(const CircularInt& cl,const CircularInt& cr)
 }
 CircularInt operator -(int x,const CircularInt& ci)
 {
-	CircularInt c1{c.min,c.max};
+	CircularInt c1{ci.min,ci.max};
 	c1.num=x-ci.num;
 	c1.norm();
 	return c1;
@@ -111,7 +113,7 @@ CircularInt& CircularInt::operator-=(const CircularInt& ci)
 CircularInt operator +(const CircularInt& cl,int x)
 {
 	CircularInt c1{cl.min,cl.max};
-	c1.num=c.num+x;
+	c1.num=cl.num+x;
 	c1.norm();
 	return c1;
 }
@@ -179,11 +181,11 @@ CircularInt& CircularInt::operator*=(const CircularInt& cl)
 	return *this;
 }
 
-CircularInt operator/(const CircularInt& c, int i)
+CircularInt operator/(const CircularInt& cl, int i)
 {
-	CircularInt c1=c;
-	if(c.num%i!=0||i==0)throw string("Error");
-        c1.num=(c.num/i);
+	CircularInt c1=cl;
+	if(cl.num%i!=0||i==0)throw string("Error");
+        c1.num=(cl.num/i);
 	c1.norm();
         return c1;
 }
