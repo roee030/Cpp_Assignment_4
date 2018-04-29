@@ -1,5 +1,32 @@
 #include "CircularInt.hpp"
 
+
+int CircularInt::check(int value)
+{
+	if (value >= min && value < max)
+	{
+		return value;
+	}
+	if (value >= min)
+	{
+		if ((value = value % range) >= min)
+		{
+			return value % range;
+		}
+		else
+		{
+			return value + range;
+		}
+	}
+	//value < min
+	if (value < max)
+	{
+		value = value % range;
+		value += ((min - value) / range) * range;
+	}
+	return -1;
+}
+
 CircularInt::CircularInt(int _min, int _max, int _num) : min(_min), max(_max), range(max - min + 1), num(_num)
 {
 }
@@ -26,7 +53,7 @@ istream& operator>>(istream& in, CircularInt& c)
 CircularInt& CircularInt::operator=(const CircularInt& another)
 {
 	puts("CircularInt& CircularInt::operator=(const CircularInt& another)");
-	num=another.num;
+	num = CircularInt::check(another.num);
 	min=another.min;
 	max=another.max;
 	range=another.range;

@@ -16,6 +16,8 @@ private:
 		int range;
 		int num;
 
+		int check(int value);
+
 public:
 		CircularInt(int min, int max, int num);
 		CircularInt(int min, int max);
