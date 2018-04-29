@@ -19,6 +19,7 @@ private:
 		int check(int value);
 
 public:
+		void norm();
 		CircularInt(int min, int max, int num);
 		CircularInt(int min, int max);
 		CircularInt();
