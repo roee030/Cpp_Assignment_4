@@ -355,7 +355,7 @@ CircularInt operator/(const int lhs, const CircularInt & rhs)
 	return rhs / lhs;
 }
 
-
+/*
 int main() 
 {
 	CircularInt hour{ 1, 12 };                 // <hour is an integer between 1 and 12, like an hour on the clock>
@@ -384,3 +384,4 @@ int main()
 	//  * when are there two or more answers to a/b?
 	//	* when is there no answer to a/b?
 }
+*/
