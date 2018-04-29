@@ -1,8 +1,5 @@
 #include "CircularInt.hpp"
 #include <string>
-/*
-*constructor
-*/
 CircularInt::CircularInt(int _min, int _max)
 {
 	min=_min;
@@ -71,85 +68,85 @@ CircularInt& CircularInt::operator++()
 	return *this;
 }
 
-CircularInt operator -(const CircularInt& c,int i)
+CircularInt operator -(const CircularInt& c,int x)
 {
 	CircularInt c1{c.min,c.max};
-	c1.num=c.num-i;
+	c1.num=c.num-x;
 	c1.norm();
 	return c1;
 }
-CircularInt operator -(const CircularInt& c)
+CircularInt operator -(const CircularInt& ci)
 {
 	CircularInt c1{c.min,c.max};
-	c1.num=-c.num;
+	c1.num=-ci.num;
 	c1.norm();
 	return c1;
 }
-CircularInt operator -(const CircularInt& c1,const CircularInt& c2)
+CircularInt operator -(const CircularInt& cl,const CircularInt& cr)
 {
-	CircularInt c{c1.min,c1.max};
-	c.num=c1.num-c2.num;
+	CircularInt c{cl.min,cl.max};
+	c.num=cl.num-cr.num;
 	c.norm();
 	return c;
 }
-CircularInt operator -(int i,const CircularInt& c)
+CircularInt operator -(int x,const CircularInt& ci)
 {
 	CircularInt c1{c.min,c.max};
-	c1.num=i-c.num;
+	c1.num=x-ci.num;
 	c1.norm();
 	return c1;
 }
-CircularInt& CircularInt::operator-=(int i)
+CircularInt& CircularInt::operator-=(int x)
 {
-	this->num-=i;
+	this->num-=x;
 	this->norm();
 	return *this;
 }
-CircularInt& CircularInt::operator-=(const CircularInt& c)
+CircularInt& CircularInt::operator-=(const CircularInt& ci)
 {
-	this->num-=c.num;
+	this->num-=ci.num;
 	this->norm();
 	return *this;
 }
-CircularInt operator +(const CircularInt& c,int i)
+CircularInt operator +(const CircularInt& cl,int x)
 {
-	CircularInt c1{c.min,c.max};
-	c1.num=c.num+i;
+	CircularInt c1{cl.min,cl.max};
+	c1.num=c.num+x;
 	c1.norm();
 	return c1;
 }
-CircularInt operator +(int i,const CircularInt& c)
+CircularInt operator +(int x,const CircularInt& cr)
 {
-	CircularInt c1{c.min,c.max};
-	c1.num=c.num+i;
+	CircularInt c1{cr.min,cr.max};
+	c1.num=cr.num+x;
 	c1.norm();
 	return c1;
 }
-CircularInt operator+(CircularInt& c1, CircularInt& c2)
+CircularInt operator+(CircularInt& cl, CircularInt& cr)
 {
-	CircularInt c{c1.min,c1.max};
-	c.num=c1.num+c2.num;
+	CircularInt c{cl.min,cl.max};
+	c.num=cl.num+cr.num;
 	c.norm();
 	return c;
 }
 
-CircularInt& CircularInt::operator+=(int i)
+CircularInt& CircularInt::operator+=(int x)
 {
-	this->num+=i;
+	this->num+=x;
 	this->norm();
 	return *this;
 }
-CircularInt& CircularInt::operator+=(const CircularInt& c)
+CircularInt& CircularInt::operator+=(const CircularInt& cl)
 {
-	this->num+=c.num;
+	this->num+=cl.num;
 	this->norm();
 	return *this;
 }
 
-CircularInt operator *(int i,const CircularInt& c)
+CircularInt operator *(int x,const CircularInt& cr)
 {
-	CircularInt c1{c.min,c.max};
-	c1.num=c.num*i;
+	CircularInt c1{cr.min,cr.max};
+	c1.num=cr.num*x;
 	c1.norm();
 	return c1;
 }
@@ -161,23 +158,23 @@ CircularInt operator*(CircularInt& c1, CircularInt& c2)
 	c.norm();
 	return c;
 }
-CircularInt operator *(const CircularInt& c,int i)
+CircularInt operator *(const CircularInt& cl,int x)
 {
-	CircularInt c1{c.min,c.max};
-	c1.num=c.num*i;
+	CircularInt c1{cl.min,cl.max};
+	c1.num=cl.num*x;
 	c1.norm();
 	return c1;
 }
 //##############3
-CircularInt& CircularInt::operator*=(int i)
+CircularInt& CircularInt::operator*=(int x)
 {
-	this->num*=i;
+	this->num*=x;
 	this->norm();
 	return *this;
 }
-CircularInt& CircularInt::operator*=(const CircularInt& c)
+CircularInt& CircularInt::operator*=(const CircularInt& cl)
 {
-	this->num*=c.num;
+	this->num*=cl.num;
 	this->norm();
 	return *this;
 }
