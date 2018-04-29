@@ -189,30 +189,30 @@ CircularInt operator/(const CircularInt& cl, int i)
 	c1.norm();
         return c1;
 }
-CircularInt operator/(int i,const CircularInt& c)
+CircularInt operator/(int i,const CircularInt& cr)
 {
-	CircularInt c1{c.min,c.max};
-	if(c.num==0||i%c.num!=0)throw string("Division error");
-	c1.num=i/c.num;
+	CircularInt c1{cr.min,cr.max};
+	if(cr.num==0||i%cr.num!=0)throw string("Division error");
+	c1.num=i/cr.num;
 	c1.norm();
 	return c1;
 }
-CircularInt& CircularInt::operator/=(int i)
+CircularInt& CircularInt::operator/=(int x)
 {
-	if(num%i!=0||i==0)throw string("error");
-        num=num/i;
+	if(num%x!=0||x==0)throw string("error");
+        num=num/x;
 	this->norm();
         return *this;
 }
 
-void CircularInt::operator=(int i)
+void CircularInt::operator=(int x)
 {
-	this->num=i;
+	this->num=x;
 	this->norm();
 }
-void CircularInt::operator=(const CircularInt& c)
+void CircularInt::operator=(const CircularInt& cl)
 {
-	this->num=c.num;
+	this->num=cl.num;
 	this->norm();
 }
 
@@ -220,29 +220,29 @@ bool CircularInt::operator ==(const CircularInt& c)
 {
 	return(num==c.num);
 }
-bool CircularInt::operator ==(int i)
+bool CircularInt::operator ==(int x)
 {
-	return(num==i);
+	return(num==x);
 }
-bool operator==(int i, CircularInt& c)
+bool operator==(int x, CircularInt& cr)
 {
-	return(c.num==i);
+	return(cr.num==x);
 }
 bool CircularInt::operator !=(const CircularInt& c)
 {
 	return(num!=c.num);
 }
-bool operator!=(int i, CircularInt& c)
+bool operator!=(int x, CircularInt& c)
 {
-	return(i!=c.num);
+	return(x!=c.num);
 }
-bool operator!=(CircularInt& c,int i)
+bool operator!=(CircularInt& c,int x)
 {
-	return(i!=c.num);
+	return(x!=c.num);
 }
-bool CircularInt::operator >(int i)
+bool CircularInt::operator >(int x)
 {
-	return(num>i);
+	return(num>x);
 }
 bool operator>(int i, CircularInt& c)
 {
@@ -252,9 +252,9 @@ bool CircularInt::operator >(const CircularInt& c)
 {
 	return(num>c.num);
 }
-bool CircularInt::operator >=(int i)
+bool CircularInt::operator >=(int x)
 {
-	return(num>=i);
+	return(num>=x);
 }	
 bool CircularInt::operator >=(const CircularInt& c)
 {
@@ -264,29 +264,29 @@ bool operator>=(int i, CircularInt& c)
 {
 	return(i>=c.num);
 }
-bool CircularInt::operator <(int i)
+bool CircularInt::operator <(int x)
 {
-	return(num<i);
+	return(num<x);
 }
 bool CircularInt::operator <(const CircularInt& c)
 {
 	return (num<c.num);
 }
-bool operator<(int i, CircularInt& c)
+bool operator<(int x, CircularInt& c)
 {
-	return (i<c.num);
+	return (x<c.num);
 }
-bool CircularInt::operator <=(int i)
+bool CircularInt::operator <=(int x)
 {
-	return (num<=i);
+	return (num<=x);
 }
 bool CircularInt::operator <=(const CircularInt& c)
 {
 	return (num<=c.num);
 }
-bool operator<=(int i, CircularInt& c)
+bool operator<=(int x, CircularInt& c)
 {
-	return (i<=c.num);
+	return (x<=c.num);
 }
 /*
 int main() 
